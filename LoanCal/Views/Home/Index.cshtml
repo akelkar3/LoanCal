@@ -1,0 +1,75 @@
+﻿
+<div id="bodyContainer" ng-app="LoanCalculatorApp" class="ng-cloak">
+    <section id="content">
+        <div class="container">
+            <div class="row">
+                <div class="container text-center col-md-12" ng-controller="LoanCtrl">
+                   
+                    <div class="front ">
+                       
+                        <div class=" ">
+                            <form class="form-inline">
+                                <div class="row" id="loanInputCell" ng-repeat="data in loans">
+                                    <br />
+                                    <div class="col-lg-2 h4">Loan {{$index+1}}: </div>
+                                    <div class="col-lg-3  col-md-3 col-sm-3  col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">$</span>
+                                            <input type="number" ng-model="data.balance" placeholder="Balance" class="form-control" id="balance">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3  col-md-3  col-sm-3 col-xs-12">
+                                        <div class="input-group">
+                                            <input type="number" ng-model="data.rate" placeholder="Interest Rate" class="form-control" id="rate">
+                                            <span class="input-group-addon ">%</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3  col-md-3  col-sm-3  col-xs-12">
+                                        <div class="input-group">
+                                            <input type="number" ng-model="data.term" placeholder="Term" class="form-control" id="term">
+                                            <span class="input-group-addon ">Months</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <button ng-if="$last" type="button" class="pull-right btn btn-md btn-circle btn-success "  id="addRow" ng-click="addLoan()" ><i class="glyphicon glyphicon-plus"></i></button>
+                                    </div>
+                                </div>
+                               <br />
+                            </form>
+                            <button class="btn btn-info btn-lg option" ng-click="calculate()" ng-disabled="working">calculate <i class="glyphicon glyphicon-random"></i></button>
+                        </div>
+                        <hr />
+                        
+                        <div class="well" ng-repeat="table in tableArray">
+                            <span class="pull-left"  ng-if="!$last"><h2>Loan {{$index+1}}: </h2></span>
+                            <span class="pull-left" ng-if="$last" ><h2>Pool: </h2></span>
+                            <table ng-table="table.tableParams" class="table text-center table-striped" show-filter="true">
+                                <thead>
+                                <th  class="text-center">Month</th>
+                                <th  class="text-center">Intrest</th>
+                                <th  class="text-center">Principal</th>
+                                <th  class="text-center">Remaining Balance</th>
+                                </thead>
+                                <tr ng-repeat="detail in $data" class="text-center">
+                                    <td >{{$index+1}} </td>
+                                    <td>{{detail.intrest  | number : 2}} </td>
+                                    <td>{{detail.principal | number : 2}} </td>
+                                    <td>{{detail.balance | number : 2}} </td>
+                                </tr>
+                            </table>
+                        </div>
+                       
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/Scripts/angular.js")
+    @Scripts.Render("~/Scripts/app/loan-controller.js")
+@Scripts.Render("~/Scripts/ng-table.js")
+
+}
