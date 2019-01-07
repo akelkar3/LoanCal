@@ -8,25 +8,25 @@
                     <div class="front ">
                        
                         <div class=" ">
-                            <form class="form-inline">
+                            <form name="form" class="form-inline">
                                 <div class="row" id="loanInputCell" ng-repeat="data in loans">
                                     <br />
                                     <div class="col-lg-2 h4">Loan {{$index+1}}: </div>
                                     <div class="col-lg-3  col-md-3 col-sm-3  col-xs-12">
                                         <div class="input-group">
-                                            <span class="input-group-addon">$</span>
-                                            <input type="number" ng-model="data.balance" placeholder="Balance" class="form-control" id="balance">
+                                            <span class="input-group-addon ">$</span>
+                                            <input type="number" ng-model="data.balance" placeholder="Balance" class="form-control " id="balance"aria-label="Amount"  ng-required="true">
                                         </div>
                                     </div>
                                     <div class="col-lg-3  col-md-3  col-sm-3 col-xs-12">
                                         <div class="input-group">
-                                            <input type="number" ng-model="data.rate" placeholder="Interest Rate" class="form-control" id="rate">
+                                            <input type="number" ng-model="data.rate" placeholder="Interest Rate" class="form-control" id="rate" aria-label="Amount" ng-required="true">
                                             <span class="input-group-addon ">%</span>
                                         </div>
                                     </div>
                                     <div class="col-lg-3  col-md-3  col-sm-3  col-xs-12">
                                         <div class="input-group">
-                                            <input type="number" ng-model="data.term" placeholder="Term" class="form-control" id="term">
+                                            <input type="number" ng-model="data.term" placeholder="Term" class="form-control" id="term"aria-label="Amount" ng-required="true" >
                                             <span class="input-group-addon ">Months</span>
                                         </div>
                                     </div>
@@ -36,7 +36,8 @@
                                 </div>
                                <br />
                             </form>
-                            <button class="btn btn-info btn-lg option" ng-click="calculate()" ng-disabled="working">calculate <i class="glyphicon glyphicon-random"></i></button>
+                            <button class="btn btn-info btn-lg option" ng-click="calculate()" ng-disabled="form.$invalid">Show Cashflow <i class="glyphicon glyphicon-random"></i></button>
+                           <br /> <span> <small class="text-center text-danger" ng-show="form.$invalid ">Please enter all the loan information</small></span>
                         </div>
                         <hr />
                         

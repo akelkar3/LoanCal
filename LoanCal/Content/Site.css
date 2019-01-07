@@ -46,3 +46,6 @@ textarea {
         line-height: 1.33;
         border-radius: 35px;
     }
+    .input.ng-invalid.ng-touch {
+        background-color: lightcoral;
+    }

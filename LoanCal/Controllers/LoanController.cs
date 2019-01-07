@@ -15,7 +15,7 @@ namespace LoanCal.Controllers
     {
         [ResponseType(typeof(List<List<CashFlow>>))]
         [HttpPost]
-        public async Task<IHttpActionResult> Calculate(List<LoanDetail> loanList)
+        public  IHttpActionResult Calculate(List<LoanDetail> loanList)
         {
             List<List<CashFlow>> retList = new List<List<CashFlow>>();
             // test data
