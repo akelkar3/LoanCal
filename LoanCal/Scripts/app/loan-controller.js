@@ -1,17 +1,14 @@
 ﻿angular.module('LoanCalculatorApp', ["ngTable"])
     .controller('LoanCtrl', function ($scope, $http, NgTableParams) {
-        
-       
-        $scope.title = "welcome";
-        $scope.working = false;
         $scope.data = [];
         $scope.loans = [];
+        //create first elemetn in UI
         var loan = new Object();
         loan.balance = '';
         loan.rate = '';
         loan.term = '';
         $scope.loans.push(loan);
-        //pagination    
+        //function to add each line of loan 
         $scope.addLoan = function () {
            var loan = new Object();
             loan.balance ='';
@@ -19,6 +16,11 @@
             loan.term = '';
             $scope.loans.push(loan);
         }
+        $scope.removeLoan = function (index) {
+           
+            $scope.loans.splice(index, 1);
+        }
+      
         $scope.tableArray=[]
         //calling the api
         $scope.calculate = function () {

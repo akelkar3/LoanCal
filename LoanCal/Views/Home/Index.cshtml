@@ -4,9 +4,7 @@
         <div class="container">
             <div class="row">
                 <div class="container text-center col-md-12" ng-controller="LoanCtrl">
-                   
                     <div class="front ">
-                       
                         <div class=" ">
                             <form name="form" class="form-inline">
                                 <div class="row" id="loanInputCell" ng-repeat="data in loans">
@@ -15,7 +13,7 @@
                                     <div class="col-lg-3  col-md-3 col-sm-3  col-xs-12">
                                         <div class="input-group">
                                             <span class="input-group-addon ">$</span>
-                                            <input type="number" ng-model="data.balance" placeholder="Balance" class="form-control " id="balance"aria-label="Amount"  ng-required="true">
+                                            <input name="balance" type="text" ng-model="data.balance" placeholder="Balance" class="form-control " id="balance" aria-label="Amount" ng-required="true" ng-pattern-restrict="/^[0-9]{1,10}$/" maxlength="10">
                                         </div>
                                     </div>
                                     <div class="col-lg-3  col-md-3  col-sm-3 col-xs-12">
@@ -26,43 +24,43 @@
                                     </div>
                                     <div class="col-lg-3  col-md-3  col-sm-3  col-xs-12">
                                         <div class="input-group">
-                                            <input type="number" ng-model="data.term" placeholder="Term" class="form-control" id="term"aria-label="Amount" ng-required="true" >
+                                            <input type="number" ng-model="data.term" placeholder="Term" class="form-control" id="term" aria-label="Amount" ng-required="true">
                                             <span class="input-group-addon ">Months</span>
                                         </div>
                                     </div>
                                     <div class="col-lg-1">
-                                        <button ng-if="$last" type="button" class="pull-right btn btn-md btn-circle btn-success "  id="addRow" ng-click="addLoan()" ><i class="glyphicon glyphicon-plus"></i></button>
+                                        <button type="button" ng-if="loans.length>1" class="pul-right btn btn-md btn-circle btn-danger " id="addRow" ng-click="removeLoan($index)"><i class="glyphicon glyphicon-minus"></i></button>
+                                        <button ng-if="$last" type="button" class="pull-right btn btn-md btn-circle btn-success " id="addRow" ng-click="addLoan()"><i class="glyphicon glyphicon-plus"></i></button>
                                     </div>
                                 </div>
-                               <br />
+                                <br />
                             </form>
                             <button class="btn btn-info btn-lg option" ng-click="calculate()" ng-disabled="form.$invalid">Show Cashflow <i class="glyphicon glyphicon-random"></i></button>
-                           <br /> <span> <small class="text-center text-danger" ng-show="form.$invalid ">Please enter all the loan information</small></span>
+                            <br /> <span> <small class="text-center text-danger" ng-show="form.$invalid ">Please enter all the loan information</small></span>
                         </div>
                         <hr />
-                        
                         <div class="well" ng-repeat="table in tableArray">
-                            <span class="pull-left"  ng-if="!$last"><h2>Loan {{$index+1}}: </h2></span>
-                            <span class="pull-left" ng-if="$last" ><h2>Pool: </h2></span>
+                            <span class="pull-left" ng-if="!$last"><h2>Loan {{$index+1}}: </h2></span>
+                            <span class="pull-left" ng-if="$last"><h2>Pool: </h2></span>
                             <table ng-table="table.tableParams" class="table text-center table-striped" show-filter="true">
                                 <thead>
-                                    <th  class="text-center">Month</th>
-                                    <th  class="text-center">Intrest</th>
-                                    <th  class="text-center">Principal</th>
-                                    <th  class="text-center">Remaining Balance</th>
+                                <th class="text-center">Month</th>
+                                <th class="text-center">Intrest</th>
+                                <th class="text-center">Principal</th>
+                                <th class="text-center">Remaining Balance</th>
                                 </thead>
-                                    <tbody>
-                                        <tr ng-repeat="detail in $data" class="text-center">
-                                            <td>{{$index+1}} </td>
-                                            <td>{{detail.intrest  | number : 2}} </td>
-                                            <td>{{detail.principal | number : 2}} </td>
-                                            <td>{{detail.balance | number : 2}} </td>
-                                        </tr>
-                                    </tbody>
+                                <tbody>
+                                    <tr ng-repeat="detail in $data" class="text-center">
+                                        <td>{{$index+1}} </td>
+                                        <td>{{detail.intrest  | number : 2}} </td>
+                                        <td>{{detail.principal | number : 2}} </td>
+                                        <td>{{detail.balance | number : 2}} </td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
-                       
-                       
+
+
                     </div>
                 </div>
             </div>
@@ -73,6 +71,6 @@
 @section scripts {
     @Scripts.Render("~/Scripts/angular.js")
     @Scripts.Render("~/Scripts/app/loan-controller.js")
-@Scripts.Render("~/Scripts/ng-table.js")
+    @Scripts.Render("~/Scripts/ng-table.js")
 
 }

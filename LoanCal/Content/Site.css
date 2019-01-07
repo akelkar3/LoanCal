@@ -47,5 +47,5 @@ textarea {
         border-radius: 35px;
     }
     .input.ng-invalid.ng-touch {
-        background-color: lightcoral;
+        border: 5px solid ;
     }

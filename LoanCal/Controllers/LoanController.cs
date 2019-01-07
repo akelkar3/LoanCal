@@ -15,56 +15,42 @@ namespace LoanCal.Controllers
     {
         [ResponseType(typeof(List<List<CashFlow>>))]
         [HttpPost]
-        public  IHttpActionResult Calculate(List<LoanDetail> loanList)
+        public IHttpActionResult Calculate(List<LoanDetail> loanList)
         {
             List<List<CashFlow>> retList = new List<List<CashFlow>>();
-            // test data
-            //retList.Add(new CashFlow { Balance = 120, Intrest = 10, Principal = 20 });
-            //retList.Add(new CashFlow { Balance = 90, Intrest = 10, Principal = 20 });
-            //retList.Add(new CashFlow { Balance = 60, Intrest = 10, Principal = 20 });
-            //retList.Add(new CashFlow { Balance = 30, Intrest = 10, Principal = 20 });
-            //retList.Add(new CashFlow { Balance = 0, Intrest = 10, Principal = 20 });
+            //there needs to be a pool loan added at the end of list
             List<CashFlow> poolLoan = new List<CashFlow>();
             foreach (LoanDetail item in loanList)
             {
 
                 double denominator = 1 - Math.Pow((1 + item.Rate / 1200), -item.Term);
+                //calculate total months payment
                 double TMP = ((item.Balance) * (item.Rate / 1200)) / denominator;
                 List<CashFlow> loan = new List<CashFlow>();
                 for (int i = 0; i < item.Term; i++)
                 {
                     CashFlow thisMonth = new CashFlow();
-                    thisMonth.Balance = i == 0 ? item.Balance :0;
-                    if (i==0)
-                    {
-                        thisMonth.Balance = item.Balance;
-                    }
-                    else
-                    {
-                        thisMonth.Balance = loan[i - 1].Balance;
-                    }
+                    thisMonth.Balance = i == 0 ? item.Balance : loan[i - 1].Balance;
+                    //calculate intrest payment
                     thisMonth.Intrest = thisMonth.Balance * item.Rate / 1200;
+                    //calculate principal payment
                     thisMonth.Principal = TMP - thisMonth.Intrest;
-                    thisMonth.Balance  -= thisMonth.Principal;
-                    
+                    //calculate balance 
+                    thisMonth.Balance -= thisMonth.Principal;
                     loan.Add(thisMonth);
                     //calculations for pool
                     if (i >= poolLoan.Count)
-                    {
-                        
-                        poolLoan.Add( new CashFlow { Balance= thisMonth.Balance, Intrest=thisMonth.Intrest,Principal=thisMonth.Principal });
+                    {   //for loans with different terms add the values for new month
+                        poolLoan.Add(new CashFlow { Balance = thisMonth.Balance, Intrest = thisMonth.Intrest, Principal = thisMonth.Principal });
                     }
                     else
                     {
-                        poolLoan[i].Balance = poolLoan[i].Balance+ thisMonth.Balance;
-                        poolLoan[i].Intrest = poolLoan[i].Intrest + thisMonth.Intrest;
-                        poolLoan[i].Principal = poolLoan[i].Principal+ thisMonth.Principal;
-
+                        poolLoan[i].Balance += thisMonth.Balance;
+                        poolLoan[i].Intrest += thisMonth.Intrest;
+                        poolLoan[i].Principal += thisMonth.Principal;
                     }
-
-                }   
+                }
                 retList.Add(loan);
-              
             }
             retList.Add(poolLoan);
             if (!ModelState.IsValid)
