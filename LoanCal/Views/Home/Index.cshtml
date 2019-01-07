@@ -46,17 +46,19 @@
                             <span class="pull-left" ng-if="$last" ><h2>Pool: </h2></span>
                             <table ng-table="table.tableParams" class="table text-center table-striped" show-filter="true">
                                 <thead>
-                                <th  class="text-center">Month</th>
-                                <th  class="text-center">Intrest</th>
-                                <th  class="text-center">Principal</th>
-                                <th  class="text-center">Remaining Balance</th>
+                                    <th  class="text-center">Month</th>
+                                    <th  class="text-center">Intrest</th>
+                                    <th  class="text-center">Principal</th>
+                                    <th  class="text-center">Remaining Balance</th>
                                 </thead>
-                                <tr ng-repeat="detail in $data" class="text-center">
-                                    <td >{{$index+1}} </td>
-                                    <td>{{detail.intrest  | number : 2}} </td>
-                                    <td>{{detail.principal | number : 2}} </td>
-                                    <td>{{detail.balance | number : 2}} </td>
-                                </tr>
+                                    <tbody>
+                                        <tr ng-repeat="detail in $data" class="text-center">
+                                            <td>{{$index+1}} </td>
+                                            <td>{{detail.intrest  | number : 2}} </td>
+                                            <td>{{detail.principal | number : 2}} </td>
+                                            <td>{{detail.balance | number : 2}} </td>
+                                        </tr>
+                                    </tbody>
                             </table>
                         </div>
                        

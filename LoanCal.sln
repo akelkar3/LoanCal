@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoanCal", "LoanCal\LoanCal.csproj", "{5057270A-68F4-4174-8FAD-1916EDF5CC86}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoanCalTest", "LoanCalTest\LoanCalTest.csproj", "{715162D1-1030-4AAB-846D-7A1451DC4FC0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{5057270A-68F4-4174-8FAD-1916EDF5CC86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5057270A-68F4-4174-8FAD-1916EDF5CC86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5057270A-68F4-4174-8FAD-1916EDF5CC86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{715162D1-1030-4AAB-846D-7A1451DC4FC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{715162D1-1030-4AAB-846D-7A1451DC4FC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{715162D1-1030-4AAB-846D-7A1451DC4FC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{715162D1-1030-4AAB-846D-7A1451DC4FC0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
